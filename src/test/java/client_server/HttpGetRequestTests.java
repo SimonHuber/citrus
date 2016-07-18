@@ -22,7 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * This class verifies the HTTP request reponses send to a server stubbed by citrus.
+ * This class verifies the HTTP request reponses send to a server stubbed by citrus. Note that these tests needs to be
+ * started in a different ide instance than the HTTP server.
  *
  * @author shuber
  * @since dev

@@ -21,7 +21,7 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 
 /**
  * This class stubs a HTTP server waiting on port 8081 for several GET requests using the Citrus Framework. Note that
- * this test class needs to be started in a different eclipse instance than the HTTP client.
+ * these tests needs to be started in a different ide instance than the HTTP client.
  *
  * @author shuber
  */
