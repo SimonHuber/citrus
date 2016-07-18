@@ -6,10 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * TODO shuber This type ...
+ * This is a helper class for the classes {@link SampleServer} and {@link HttpGetRequestTests}. It capsulates some
+ * sample attributes as constants used by both testing classes. Moreover it defines a method to read in a JSON file as
+ * string.
  *
  * @author shuber
- * @since dev
  */
 public class ServerMockHelper {
   protected static final String GET_ORDER_POSITION = "/orderposition";
@@ -24,6 +25,12 @@ public class ServerMockHelper {
 
   protected static final String RESOURCE_PATH = "src/test/resources/";
 
+  /**
+   * This method reads the content of a JSON file and save it
+   *
+   * @param fileName
+   * @return
+   */
   protected static String getJSONFromFile(String fileName) {
 
     byte[] encodedFileContent = null;

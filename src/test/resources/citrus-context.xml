@@ -14,5 +14,5 @@
         http://www.citrusframework.org/schema/http/testcase/citrus-http-testcase.xsd">
   <citrus:schema-repository id="schemaRepository"/>
 
-  <citrus-http:server id="sampleHttpServer" port="8081" auto-start="true" resource-base="src/it/resources"/>
+  <citrus-http:server id="sampleHttpServer" port="8081" auto-start="true"/>
 </beans>

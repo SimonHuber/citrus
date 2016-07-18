@@ -22,7 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * This class verifies the HTTP-request reponses send to a server mocked by citrus.
+ * This class verifies the HTTP request reponses send to a server stubbed by citrus.
  *
  * @author shuber
  * @since dev
@@ -31,16 +31,19 @@ import org.springframework.web.client.RestTemplate;
 public class HttpGetRequestTests extends Assertions {
 
   /**
-   * @param args
    * @throws IOException
    */
 
+  @SuppressWarnings("javadoc")
   private static RestTemplate template = new RestTemplate();
 
   private static final int port = 8081;
 
   private static final String SERVER_URL = "http://localhost:";
 
+  /**
+   * This method tests that the the http request is equal to the file "orderPositionPayload.json".
+   */
   @Test
   public void getOrderPosition() {
 
@@ -53,6 +56,9 @@ public class HttpGetRequestTests extends Assertions {
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
+  /**
+   * This method tests that the the http request is equal to the file "orderPositionsPayload.json".
+   */
   @Test
   public void getOrderPositions() {
 
@@ -65,6 +71,9 @@ public class HttpGetRequestTests extends Assertions {
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
+  /**
+   * This method tests that the the http request is equal to the file "customer.json".
+   */
   @Test
   public void getAllCustomerDates() {
 
@@ -76,6 +85,10 @@ public class HttpGetRequestTests extends Assertions {
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
+  /**
+   * This method tests that the http request is equal to the address part of the file "customer.json".
+   */
+  @SuppressWarnings("null")
   @Test
   public void getCustomerAddress() {
 

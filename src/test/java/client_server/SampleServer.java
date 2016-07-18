@@ -13,7 +13,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.http.HttpStatus;
-import org.testng.annotations.BeforeTest;
 
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
@@ -21,9 +20,8 @@ import com.consol.citrus.dsl.design.TestDesigner;
 import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 
 /**
- * This test demands a list of offers from an external server which is mocked with WireMock. The HTTP request and
- * response is stubbed to simulate the use case. For the received list of offers a batch job is initialized to save or
- * update the new data.
+ * This class stubs a HTTP server waiting on port 8081 for several GET requests using the Citrus Framework. Note that
+ * this test class needs to be started in a different eclipse instance than the HTTP client.
  *
  * @author shuber
  */
@@ -33,12 +31,12 @@ public class SampleServer extends JUnit4CitrusTest {
 
   protected static long TIME_OUT = 600000000;
 
-  @BeforeTest
-  public void purge(@CitrusResource TestDesigner designer) {
-
-    designer.purgeEndpoints().endpointNames("sampleHttpServer");
-  }
-
+  /**
+   * This method stubs a HTTP server waiting for a GET request. If this request is received, the JSON file
+   * "orderPositionPayload.json" is responded.
+   *
+   * @param designer
+   */
   @Test
   @CitrusTest
   public void deliverOrderPosition(@CitrusResource TestDesigner designer) {
@@ -50,6 +48,13 @@ public class SampleServer extends JUnit4CitrusTest {
 
   }
 
+  /**
+   * This method stubs a HTTP server waiting for a GET request. If this request is received, the JSON file
+   * "orderPositionsPayload.json" is responded.
+   *
+   * @param designer
+   */
+  @SuppressWarnings("javadoc")
   @Test
   @CitrusTest
   public void deliverOrderPositions(@CitrusResource TestDesigner designer) {
@@ -61,6 +66,13 @@ public class SampleServer extends JUnit4CitrusTest {
 
   }
 
+  /**
+   * This method stubs a HTTP server waiting for a GET request. If this request is received, the JSON file
+   * "customer.json" is responded.
+   *
+   * @param designer
+   */
+  @SuppressWarnings("javadoc")
   @Test
   @CitrusTest
   public void deliverAllCustomerDates(@CitrusResource TestDesigner designer) {
@@ -71,6 +83,13 @@ public class SampleServer extends JUnit4CitrusTest {
         .contentType("application/json");
   }
 
+  /**
+   * This method stubs a HTTP server waiting for a GET request. If this request is received, the address part of the
+   * JSON file "customer.json" is responded.
+   *
+   * @param designer
+   */
+  @SuppressWarnings({ "null", "javadoc" })
   @Test
   @CitrusTest
   public void deliverCustomerAddress(@CitrusResource TestDesigner designer) {
@@ -81,14 +100,12 @@ public class SampleServer extends JUnit4CitrusTest {
     try {
       jsonObject = new JSONObject(fileContent);
     } catch (JSONException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     JSONObject address = null;
     try {
       address = jsonObject.getJSONObject("address");
     } catch (JSONException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     designer.http().server("sampleHttpServer").respond(HttpStatus.OK).payload(address.toString()).version("HTTP/1.1")
